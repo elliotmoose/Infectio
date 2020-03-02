@@ -66,10 +66,10 @@ public class WeaponData
         return newWeaponData;
     }
 
-    public static WeaponData BombWeaponData()
+    public static WeaponData MissileWeaponData()
     {
         WeaponData newWeaponData = new WeaponData();
-        newWeaponData.type = WeaponType.BOMB;
+        newWeaponData.type = WeaponType.MISSILE;
         newWeaponData.damage = 100;
         newWeaponData.cooldown = 0.8f;
         newWeaponData.range = 7;
@@ -93,8 +93,8 @@ public class WeaponData
             case WeaponType.MELEE:
                 return MeleeWeaponData();
 
-            case WeaponType.BOMB:
-                return BombWeaponData();
+            case WeaponType.MISSILE:
+                return MissileWeaponData();
 
             default:
                 Debug.LogWarning($"No WeaponData with ID: {type.ToString()}");

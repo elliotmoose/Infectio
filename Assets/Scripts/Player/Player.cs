@@ -32,12 +32,7 @@ public class Player : Entity
         
         //set 
         activeWeapons[0] = WeaponData.RapidWeaponData();
-<<<<<<< HEAD
-        // activeWeapons[1] = WeaponData.StandardWeaponData();
-=======
-        activeWeapons[1] = WeaponData.BombWeaponData();
-        //activeWeapons[2] = WeaponData.BombWeaponData();
->>>>>>> fixed issues with bombWeapon
+        activeWeapons[1] = WeaponData.MissileWeaponData();
         EquipWeapon(activeWeapons[0]); //equip first weapon
         EntityEffect slowEffect = new SlowEffect(this.gameObject);
         this._entityEffect.Add(slowEffect);
@@ -59,7 +54,7 @@ public class Player : Entity
         }
 
         foreach(EntityEffect entityEffect in this._entityEffect){
-            this.ApplyEffect(entityEffect);
+            //this.ApplyEffect(entityEffect);
             // Debug.Log(entityEffect);
             // entityEffect.Update();
             

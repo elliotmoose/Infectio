@@ -5,5 +5,5 @@
     RAPID,
     TOXIN,
     MELEE,
-    BOMB
+    MISSILE
 }
