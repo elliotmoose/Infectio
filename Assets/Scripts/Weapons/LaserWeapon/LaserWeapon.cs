@@ -19,11 +19,6 @@ public class LaserWeapon : Weapon
         GameObject laserObj = GameObject.Instantiate(laser, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // create cylinder as laser with fixed length
     // at every update check if cylinder hits enemies
