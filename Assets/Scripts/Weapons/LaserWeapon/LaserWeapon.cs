@@ -16,8 +16,8 @@ public class LaserWeapon : Weapon
     // Start is called before the first frame update
     void Start()
     {
-        GameObject laserObj = GameObject.Instantiate(laser, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
-        Laser laserScript = laserObj.GetComponent<Laser>();
+        //GameObject laserObj = GameObject.Instantiate(laser, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
+        Laser laserScript = laser.GetComponent<Laser>();
         laserScript.Activate(this._weaponData, this._owner);
         laserScript.SetOrigin(laserSpawnPoint.transform.position);
     }
