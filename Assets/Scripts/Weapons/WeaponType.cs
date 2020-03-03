@@ -5,5 +5,6 @@
     RAPID,
     TOXIN,
     MELEE,
-    MISSILE
+    MISSILE,
+    LASER
 }

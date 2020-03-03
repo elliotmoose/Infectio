@@ -5,23 +5,26 @@ using UnityEngine;
 public class LaserWeapon : Weapon
 {
 
-    public GameObject laser;
-    public Transform laserSpawnPoint;
+    public GameObject laser; // get reference by dragging
+    public Transform laserSpawnPoint; // get reference by dragging
 
     protected override void Fire()
     {
-        throw new System.NotImplementedException();
+        // do nothing tbh :/
     }
 
     // Start is called before the first frame update
     void Start()
     {
         GameObject laserObj = GameObject.Instantiate(laser, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
+        Laser laserScript = laserObj.GetComponent<Laser>();
+        laserScript.Activate(this._weaponData, this._owner);
+        laserScript.SetOrigin(laserSpawnPoint.transform.position);
     }
 
 
     // create cylinder as laser with fixed length
-    // at every update check if cylinder hits enemies
+    // at every update check if cylinder hits enemies - Laser
     // if yes cylinder length becomes spawnpoint to enemy location
     // if no then cylinder length  is still the same
 
