@@ -7,31 +7,13 @@ public class Laser : MonoBehaviour
     protected WeaponData _weaponData;
     protected GameObject _owner;
 
-    protected Vector3 _origin;
-
-    // Update is called once per frame
-    void Update()
-    {
-        CheckActivated();
-    }
+    public Transform laserSpawnPoint; // get reference by dragging
+    public Transform endpoint; // get reference by dragging
 
     public void Activate(WeaponData weaponData, GameObject owner)
     {
         this._weaponData = weaponData;
         this._owner = owner;
-    }
-
-    public void SetOrigin(Vector3 origin)
-    {
-        this._origin = origin;
-    }
-
-    protected void CheckActivated()
-    {
-        if (this._weaponData == null || this._owner == null)
-        {
-            Debug.LogWarning("Please call Activate() on instantiation of this projectile");
-        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -48,9 +30,21 @@ public class Laser : MonoBehaviour
             Entity entity = col.gameObject.GetComponent<Entity>();
             if (entity != null)
             {
+                // change cylider length
+                Vector3 cylinder = this.transform.position;
+                //Vector3 scale = this.transform.localScale;
+                //Vector3 oldLength = endpoint.transform.position - laserSpawnPoint.transform.position;
+                Vector3 newLength = entity.transform.position - this.transform.position;
+                //float multiply = newLength.y / oldLength.y;
+
+                this.transform.localScale = new Vector3(0.1f, newLength.y, 0.1f);
+                this.transform.position = laserSpawnPoint.transform.position;
                 entity.TakeDamage(this._weaponData.damage);
             }
         }
+        this.transform.localScale = new Vector3(0.1f, 3f, 0.1f);
+        this.transform.position = laserSpawnPoint.transform.position;
+        // FIX ISSUE REGARDING LASER SPAWN POINT
     }
 
     // laser check if it hits enemies

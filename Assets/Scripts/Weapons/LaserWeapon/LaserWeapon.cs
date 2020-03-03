@@ -6,7 +6,9 @@ public class LaserWeapon : Weapon
 {
 
     public GameObject laser; // get reference by dragging
-    public Transform laserSpawnPoint; // get reference by dragging
+    //public Transform laserSpawnPoint; // get reference by dragging
+    //public Transform endpoint;
+    private Laser _laserScript;
 
     protected override void Fire()
     {
@@ -17,9 +19,8 @@ public class LaserWeapon : Weapon
     void Start()
     {
         //GameObject laserObj = GameObject.Instantiate(laser, laserSpawnPoint.transform.position, laserSpawnPoint.transform.rotation);
-        Laser laserScript = laser.GetComponent<Laser>();
-        laserScript.Activate(this._weaponData, this._owner);
-        laserScript.SetOrigin(laserSpawnPoint.transform.position);
+        _laserScript = laser.GetComponent<Laser>();
+        _laserScript.Activate(this._weaponData, this._owner);
     }
 
 
