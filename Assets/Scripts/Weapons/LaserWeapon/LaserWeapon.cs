@@ -12,9 +12,6 @@ public class LaserWeapon : Weapon
 
     protected override void Fire()
     {
-
-        // if it collides with something
-       // _laserScript.Attack();
     }
 
     // Start is called before the first frame update
