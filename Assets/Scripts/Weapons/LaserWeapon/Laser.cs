@@ -16,35 +16,40 @@ public class Laser : MonoBehaviour
         this._owner = owner;
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
+    {
+        Attack(col);
+    }
+
+    public void Attack(Collider col)
     {
         //means parent died already
         if (_owner == null)
         {
-            return;
+            return; // game over screen
         }
 
         //attack ENTITIES of different TAG 
         if (col.gameObject.tag != _owner.tag)
         {
             Entity entity = col.gameObject.GetComponent<Entity>();
-            if (entity != null)
+            // check if entity is enemy or not
+            if (entity != null && entity.tag == "enemy")
             {
-                
                 // change cylider length
-                Vector3 cylinder = this.transform.position;
+                Vector3 oldPos = this.transform.position;
+                Vector3 newPos;
                 Vector3 newLength = entity.transform.position - laserSpawnPoint.transform.position;
-                //float multiply = newLength.y / oldLength.y;
 
-                this.transform.localScale = new Vector3(0.1f, newLength.y, 0.1f);
+                this.transform.localScale = new Vector3(0.1f, Mathf.Sqrt(Mathf.Pow(newLength.x, 2) + Mathf.Pow(newLength.z, 2)), 0.1f);
 
-                //this.transform.position = (laserEndPoint.transform.position - laserSpawnPoint.transform.position) / 2;
+
+                newPos.y = oldPos.y * (Mathf.Sqrt(Mathf.Pow(newLength.x, 2) + Mathf.Pow(newLength.z, 2)) / 3f);
                 entity.TakeDamage(this._weaponData.damage);
             }
         }
-        this.transform.localScale = new Vector3(0.1f, 3f, 0.1f);
+        //this.transform.localScale = new Vector3(0.1f, 3f, 0.1f);
         //this.transform.position = (laserEndPoint.transform.position - laserSpawnPoint.transform.position) / 2;
-        // FIX ISSUE REGARDING LASER SPAWN POINT
     }
 
     // laser check if it hits enemies

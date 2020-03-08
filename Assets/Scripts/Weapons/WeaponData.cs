@@ -81,7 +81,7 @@ public class WeaponData
     {
         WeaponData newWeaponData = new WeaponData();
         newWeaponData.type = WeaponType.LASER;
-        newWeaponData.damage = 100;
+        newWeaponData.damage = 3;
         newWeaponData.cooldown = 0f;
         newWeaponData.range = 7;
         newWeaponData.dnaWorth = 300;
