@@ -8,7 +8,7 @@ public class Laser : MonoBehaviour
     protected GameObject _owner;
 
     public Transform laserSpawnPoint; // get reference by dragging
-    public Transform endpoint; // get reference by dragging
+    public Transform laserEndPoint; // get reference by dragging
 
     public void Activate(WeaponData weaponData, GameObject owner)
     {
@@ -30,20 +30,20 @@ public class Laser : MonoBehaviour
             Entity entity = col.gameObject.GetComponent<Entity>();
             if (entity != null)
             {
+                
                 // change cylider length
                 Vector3 cylinder = this.transform.position;
-                //Vector3 scale = this.transform.localScale;
-                //Vector3 oldLength = endpoint.transform.position - laserSpawnPoint.transform.position;
-                Vector3 newLength = entity.transform.position - this.transform.position;
+                Vector3 newLength = entity.transform.position - laserSpawnPoint.transform.position;
                 //float multiply = newLength.y / oldLength.y;
 
                 this.transform.localScale = new Vector3(0.1f, newLength.y, 0.1f);
-                this.transform.position = laserSpawnPoint.transform.position;
+
+                //this.transform.position = (laserEndPoint.transform.position - laserSpawnPoint.transform.position) / 2;
                 entity.TakeDamage(this._weaponData.damage);
             }
         }
         this.transform.localScale = new Vector3(0.1f, 3f, 0.1f);
-        this.transform.position = laserSpawnPoint.transform.position;
+        //this.transform.position = (laserEndPoint.transform.position - laserSpawnPoint.transform.position) / 2;
         // FIX ISSUE REGARDING LASER SPAWN POINT
     }
 
