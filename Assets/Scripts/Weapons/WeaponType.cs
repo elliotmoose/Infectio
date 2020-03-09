@@ -6,5 +6,6 @@
     TOXIN,
     MELEE,
     MISSILE,
-    LASER
+    LASER,
+    LASERNEW
 }

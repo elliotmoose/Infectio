@@ -88,6 +88,17 @@ public class WeaponData
         return newWeaponData;
     }
 
+    public static WeaponData LaserNewWeaponData()
+    {
+        WeaponData newWeaponData = new WeaponData();
+        newWeaponData.type = WeaponType.LASERNEW;
+        newWeaponData.damage = 3;
+        newWeaponData.cooldown = 0f;
+        newWeaponData.range = 7;
+        newWeaponData.dnaWorth = 300;
+        return newWeaponData;
+    }
+
     public static WeaponData NewWeaponDataForType(WeaponType type)
     {
         switch (type)
@@ -109,6 +120,9 @@ public class WeaponData
 
             case WeaponType.LASER:
                 return LaserWeaponData();
+
+            case WeaponType.LASERNEW:
+                return LaserNewWeaponData();
 
             default:
                 Debug.LogWarning($"No WeaponData with ID: {type.ToString()}");

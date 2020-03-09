@@ -10,6 +10,10 @@ public class Laser : MonoBehaviour
     public Transform laserSpawnPoint; // get reference by dragging
     public Transform laserEndPoint; // get reference by dragging
 
+    public void Start()
+    {
+    }
+
     public void Activate(WeaponData weaponData, GameObject owner)
     {
         this._weaponData = weaponData;
@@ -32,6 +36,7 @@ public class Laser : MonoBehaviour
 
     public void Attack(Collider col)
     {
+        /*
         //means parent died already
         if (_owner == null)
         {
@@ -68,7 +73,7 @@ public class Laser : MonoBehaviour
             
         }
         //this.transform.localScale = new Vector3(0.1f, 3f, 0.1f);
-        //this.transform.position = (laserEndPoint.transform.position - laserSpawnPoint.transform.position) / 2;
+        //this.transform.position = (laserEndPoint.transform.position - laserSpawnPoint.transform.position) / 2;*/
     }
 
     // laser check if it hits enemies
