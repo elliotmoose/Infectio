@@ -41,8 +41,8 @@ GameObject:
   - component: {fileID: 6074080299237905841}
   - component: {fileID: 7655832020475468776}
   - component: {fileID: 538761378799576669}
-  - component: {fileID: -2289675741701647951}
-  - component: {fileID: 3902731963444805707}
+  - component: {fileID: -6211451357488111367}
+  - component: {fileID: 5432286304843078704}
   m_Layer: 0
   m_Name: LaserNew
   m_TagString: Untagged
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 4670494452737884278}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.6965356, y: 3.61, z: -0.7307406}
-  m_LocalScale: {x: 1, y: 1, z: 7}
+  m_LocalScale: {x: 3, y: 1, z: 0.5}
   m_Children:
   - {fileID: 8685359418558748638}
   - {fileID: 6230090485967041262}
@@ -111,13 +111,13 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.82230705
+        value: 0.18812025
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -176,45 +176,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6e610a449b05044972dc66a0f19acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!50 &-2289675741701647951
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!54 &-6211451357488111367
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4670494452737884278}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
+  serializedVersion: 2
   m_Mass: 1
-  m_LinearDrag: 0
+  m_Drag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_UseGravity: 0
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
   m_Constraints: 0
---- !u!68 &3902731963444805707
-EdgeCollider2D:
+  m_CollisionDetection: 0
+--- !u!65 &5432286304843078704
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4670494452737884278}
-  m_Enabled: 1
-  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.05, y: 0}
-  - {x: 0.05, y: 0}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 1.0999999}
+  m_Center: {x: 0, y: 0, z: 0.49999997}
 --- !u!1 &5503633161003590983
 GameObject:
   m_ObjectHideFlags: 0

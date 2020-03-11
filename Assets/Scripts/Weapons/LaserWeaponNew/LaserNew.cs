@@ -6,91 +6,86 @@ public class LaserNew : MonoBehaviour
 {
     protected WeaponData _weaponData;
     protected GameObject _owner;
+    protected Vector3 _origin;
+    protected float _range;
 
-    LineRenderer lineRenderer = null;
-    Vector3[] startingLineRendererPoints = null;
-
-    //public Transform laserSpawnPoint;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        lineRenderer = GetComponent<LineRenderer>();
-
-        //set the max points in the line renderer.
-        lineRenderer.positionCount = 4;
-
-        //setup the array to store the starting positions of the line renderer points.
-        startingLineRendererPoints = new Vector3[4];
-
-        lineRenderer.SetPosition(0, transform.Find("Pos1").localPosition);
-        lineRenderer.SetPosition(1, transform.Find("Pos2").localPosition);
-        lineRenderer.SetPosition(2, transform.Find("Pos3").localPosition);
-        lineRenderer.SetPosition(3, transform.Find("Pos4").localPosition);
-
-        lineRenderer.GetPositions(startingLineRendererPoints);
-
+    void Update(){
+        CheckOutOfRange();
+        CheckActivated();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void CheckOutOfRange() 
     {
-        bool hitSomething = false;
-
-        if (lineRenderer)
+        if(Vector3.Distance(this._origin, this.transform.position) > 0 ) 
         {
-            RaycastHit hitInfo;
+            Destroy(this.gameObject);
+        }
+    }
 
-            // create an array to hold the line renderer points
-            Vector3[] newPointsInLine = null;
+    protected void CheckActivated()
+    {
 
-            for (int i = 0; i < startingLineRendererPoints.Length - 1; i++)
-            {
-                if (Physics.Linecast(startingLineRendererPoints[i], startingLineRendererPoints[i + 1], out hitInfo))
-                {
-                    Debug.Log("Line cast between " + i + " " + startingLineRendererPoints[i] + " and " + i + 1 + " " + startingLineRendererPoints[i + 1]);
-
-                    //initialize the new array to the furthest point + 1 since the array is 0-based
-                    newPointsInLine = new Vector3[(i + 1) + 1];
-
-                    //transfer the points we need to the new array
-                    for (int i2 = 0; i2 < newPointsInLine.Length; i2++)
-                    {
-                        newPointsInLine[i2] = startingLineRendererPoints[i2];
-                    }
-                    
-                    //set the current point to the raycast hit point (the end of the line renderer)
-                    newPointsInLine[i + 1] = hitInfo.point;
-
-                    //flag that we hit something
-                    hitSomething = true;
-
-                    break;
-                }
-            }
-
-            if (hitSomething)
-            {
-                //use new points for the line renderer
-                lineRenderer.positionCount = newPointsInLine.Length;
-
-                lineRenderer.SetPositions(newPointsInLine);
-
-                // attack the enemy that it hits
-            }
-            else
-            {
-                //use old points for the line renderer
-                lineRenderer.positionCount = startingLineRendererPoints.Length;
-
-                lineRenderer.SetPositions(startingLineRendererPoints);
-            }
+        if(this._weaponData == null || this._owner == null)
+        {
+            Debug.LogWarning("Please call Activate() on instantiation of this projectile");
         }
     }
 
     public void Activate(WeaponData weaponData, GameObject owner)
     {
+        // Debug.Log("CALLED");
         this._weaponData = weaponData;
         this._owner = owner;
+        this._range = weaponData.range;
+        SetRange(this._range);
+    }
+
+    public void SetOrigin(Vector3 origin){
+        this._origin = origin;
+    }
+
+    public void SetRange(float range){
+        this.gameObject.transform.localScale = new Vector3(this.gameObject.transform.localScale.x, this.gameObject.transform.localScale.y, range);
+    }
+
+    void OnTriggerStay(Collider col)
+    {
+        //means parent died already
+        if(this._owner == null) 
+        {
+            return;
+        }
+        //attack ENTITIES of different TAG 
+        if(col.gameObject.tag != _owner.tag)
+        {           
+            Entity entity = col.gameObject.GetComponent<Entity>();
+            if(entity != null)
+            {
+                Debug.Log("enemy taking damage");
+                Debug.Log(this._weaponData);
+                entity.TakeDamage(this._weaponData.damage);
+                Destroy(this.gameObject);           
+            }
+        }
     }
 }
+
+
+// public class LaserNew : Projectile
+// {
+//     public float range;
+//     override public void CheckOutOfRange() 
+//     {
+//         if(Vector3.Distance(this._origin, this.transform.position) > 0) 
+//         {
+//             Destroy(this.gameObject);
+//         }
+//     }
+
+//     override public void Activate(WeaponData weaponData, GameObject owner) 
+//     {
+//         this._weaponData = weaponData;
+//         this._owner = owner;
+//     }
+
+// }
