@@ -170,6 +170,7 @@ public class Boss : Enemy
         Quaternion verticalOffset = Quaternion.Euler(angle, 0, 0);
         weapon.transform.rotation = Quaternion.LookRotation(_laserDirectionCenter) * horizontalOffset * verticalOffset; 
         GetEquippedWeaponComponent().AttemptFire();
+        
     }
 
     bool ShouldFinishAttack() 

@@ -140,6 +140,7 @@ public class Joystick : EventTrigger
         {            
             isActive = true;            
         }
+
     }
 
     public override void OnPointerUp(PointerEventData touch)

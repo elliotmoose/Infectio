@@ -49,6 +49,17 @@ public class Player : Entity
         }
     }
 
+    // protected override void TakeDamage(float damage)
+    // {
+    //     _curHealth -= damage; //input how much to decrease by-- POSITIVE VALUE        
+    //     OnTakeDamage(damage);
+
+    //     if(_curHealth <= 0) {
+    //         this.Die();
+    //     }
+    // }
+
+
     protected override void OnDisabledChanged(bool disabled) {
         if(disabled) {
             if(_isAttacking) {

@@ -132,6 +132,8 @@ public class Enemy : Entity
             return;
         }
         WaveManager.GetInstance().OnEnemyTakeDamage(damage + Mathf.Min(_curHealth, 0));
+
+        
     }
 
     public override void Die() 
